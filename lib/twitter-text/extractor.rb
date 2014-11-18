@@ -260,10 +260,10 @@ module Twitter
       return [] unless text =~ /[#＃]/
 
       tags = []
-      text.scan(Twitter::Regex[:valid_hashtag]) do |before, hash, hash_text|
+      text.scan(Twitter::Regex[:valid_hashtag]) do |before, hash_text|
         match_data = $~
-        start_position = match_data.char_begin(2)
-        end_position = match_data.char_end(3)
+        start_position = match_data.char_begin(1)
+        end_position = match_data.char_end(2)
         after = $'
         unless after =~ Twitter::Regex[:end_hashtag_match]
           tags << {
